@@ -1,0 +1,126 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Serif SC', serif;
+  background-image: url('../assets/Bambou.jpeg');
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: absolute;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+h1 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 2em;
+  margin: 1em 0;
+  color: #3e3a2d;
+  text-shadow: 1px 1px 0 #ccc;
+}
+
+#board {
+  position: relative;
+  width: 400px;
+  height: 500px;
+  border: 7px solid #3e3a2d;
+  background-color: #b2aa90;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: repeat(5, 100px);
+  gap: 2px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.piece {
+  position: absolute;
+  background-color: #466b44a0;
+  border: 2px solid #3e3a2d;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.15s ease-in-out;
+}
+
+.piece.selected {
+  outline: 3px solid #bf3131;
+  outline-offset: -3px;
+}
+
+.piece {
+  transition: top 0.3s ease, left 0.3s ease;
+}
+
+#restartBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 48px;
+  height: 48px;
+  margin: 30px;
+}
+
+#restartBtn img {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 2px #2f2a20);
+  transition: transform 0.2s ease;
+}
+
+#restartBtn:hover img {
+  transform: rotate(15deg);
+}
+.piece img.piece-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.piece[data-id='1'] {
+  background-color: #c2b280; /* beige clair doré, teinte inspirée du bois clair */
+  color: #000;
+  font-weight: bold;
+}
+.piece:not(.ghost) {
+  z-index: 1;
+}
+
+.piece.ghost {
+  position: absolute;
+  background-color: #c8bfae;
+  opacity: 0.4;
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 0;
+  outline: 3px dashed #615837;
+  outline-offset: -6px;
+  z-index: 0;
+}
+
+.background-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  z-index: -1; /* derrière tout */
+}
