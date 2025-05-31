@@ -5,10 +5,10 @@ const grid = Array.from({ length: 5 }, () => Array(4).fill(null));
 
 const pieces = [
   { id: 1, size: '2x2', x: 1, y: 0, label: '曹操', initialX: 1, initialY: 0 },
-  { id: 2, size: '1x2', x: 0, y: 0, label: '关羽',  initialX: 0, initialY: 0 },
-  { id: 3, size: '1x2', x: 3, y: 0, label: '张飞',  initialX: 3, initialY: 0 },
-  { id: 4, size: '2x1', x: 1, y: 2, label: '黄忠', initialX: 1, initialY: 2 },
-  { id: 5, size: '2x1', x: 1, y: 3, label: '赵云', initialX: 1, initialY: 3 },
+  { id: 2, size: '1x2', x: 0, y: 0, label: '',  initialX: 0, initialY: 0 },
+  { id: 3, size: '1x2', x: 3, y: 0, label: '',  initialX: 3, initialY: 0 },
+  { id: 4, size: '2x1', x: 1, y: 2, label: '', initialX: 1, initialY: 2 },
+  { id: 5, size: '2x1', x: 1, y: 3, label: '', initialX: 1, initialY: 3 },
   { id: 6, size: '1x1', x: 0, y: 3, label: '', initialX: 0, initialY: 3 },
   { id: 7, size: '1x1', x: 3, y: 3, label: '', initialX: 3, initialY: 3 },
   { id: 8, size: '1x1', x: 0, y: 4, label: '', initialX: 0, initialY: 4 },
@@ -142,13 +142,19 @@ pieces.forEach(createPiece);
 
 function checkVictory() {
   const caoCao = pieces.find(p => p.id === 1);
-  if (caoCao.x === 1 && caoCao.y === 3) {
+  if (caoCao.x === 1 && caoCao.y === 3 || true) {
+    document.querySelectorAll('.piece').forEach(p => p.style.pointerEvents = 'none');
+
+    const el = document.querySelector(`.piece[data-id='1']`);
+    el.style.transition = 'top 0.7s ease-in';
+    el.style.top = '600px'; // glisse vers le bas en dehors du board
+
     setTimeout(() => {
-      alert("🎉 Bravo ! Vous avez gagné !");
-      document.getElementById('restartBtn').style.display = 'block';
-    }, 100);
+      document.getElementById('victoryModal').classList.remove('hidden');
+    }, 800);
   }
 }
+
 
 document.getElementById('restartBtn').addEventListener('click', () => {
   // Réinitialiser les positions
@@ -210,4 +216,9 @@ function createGhostPiece(piece) {
   el.style.top = piece.y * 100 + 'px';
 
   board.appendChild(el);
+}
+
+function restartGame() {
+  document.getElementById('victoryModal').classList.add('hidden');
+  document.getElementById('restartBtn').click();
 }
