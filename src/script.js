@@ -1,6 +1,5 @@
 const board = document.getElementById('board');
 
-// grille logique 4 colonnes x 5 lignes
 const grid = Array.from({ length: 5 }, () => Array(4).fill(null));
 
 const pieces = [
@@ -142,12 +141,12 @@ pieces.forEach(createPiece);
 
 function checkVictory() {
   const caoCao = pieces.find(p => p.id === 1);
-  if (caoCao.x === 1 && caoCao.y === 3 || true) {
+  if (caoCao.x === 1 && caoCao.y === 3) {
     document.querySelectorAll('.piece').forEach(p => p.style.pointerEvents = 'none');
 
     const el = document.querySelector(`.piece[data-id='1']`);
     el.style.transition = 'top 0.7s ease-in';
-    el.style.top = '600px'; // glisse vers le bas en dehors du board
+    el.style.top = '600px';
 
     setTimeout(() => {
       document.getElementById('victoryModal').classList.remove('hidden');
@@ -173,7 +172,6 @@ document.getElementById('restartBtn').addEventListener('click', () => {
 let selectedPieceId = null;
 
 
-// Quand on appuie sur une touche fléchée, on tente un déplacement
 document.addEventListener('keydown', (e) => {
   if (!selectedPieceId) return;
 
