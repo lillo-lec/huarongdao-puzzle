@@ -47,7 +47,6 @@ h1 {
   border: 2px solid #3e3a2d;
   border-radius: 6px;
   color: #fff;
-  z-index: 2;
   font-weight: bold;
   font-size: 1.2em;
   text-align: center;
@@ -172,7 +171,7 @@ html, body {
   content: '';
   width: 16px;
   height: 16px;
-  background-color: #191970d9;
+  background-color: #0f0f72d9;
   border: 1px solid #5a3e2b;
   border-radius: 50%;
   position: absolute;
@@ -185,7 +184,7 @@ html, body {
   content: '';
   width: 16px;
   height: 16px;
-  background-color: #6d071ad9;
+  background-color: #660a1bd9;
   border: 1px solid #5a3e2b;
   border-radius: 50%;
   position: absolute;
