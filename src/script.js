@@ -102,7 +102,6 @@ function createPiece(piece) {
       const dx = ev.clientX - centerX;
       const dy = ev.clientY - centerY;
   
-      // Ici, on regarde si la souris a traversé un seuil de +100 ou -100 pixels
       if (Math.abs(dx) > Math.abs(dy)) {
         const thresholdX = 100 * (lastMovedX + Math.sign(dx));
         if (Math.abs(dx) >= Math.abs(thresholdX)) {
@@ -154,21 +153,6 @@ function checkVictory() {
   }
 }
 
-
-document.getElementById('restartBtn').addEventListener('click', () => {
-  // Réinitialiser les positions
-  pieces.forEach(p => {
-    const el = document.querySelector(`.piece[data-id='${p.id}']`);
-    el.style.left = (p.initialX * 100) + 'px';
-    el.style.top = (p.initialY * 100) + 'px';
-    p.x = p.initialX;
-    p.y = p.initialY;
-  });
-
-  occupyGridAll();
-  document.getElementById('restartBtn').style.display = 'none';
-});
-
 let selectedPieceId = null;
 
 
@@ -217,6 +201,33 @@ function createGhostPiece(piece) {
 }
 
 function restartGame() {
+  document.querySelectorAll('.piece').forEach(p => {
+    p.classList.remove('selected');
+    p.style.pointerEvents = 'auto';
+  });
+  selectedPieceId = null;
   document.getElementById('victoryModal').classList.add('hidden');
   document.getElementById('restartBtn').click();
+  init();
+}
+
+function init() {
+  for (let y = 0; y < 5; y++) {
+    for (let x = 0; x < 4; x++) {
+      grid[y][x] = null;
+    }
+  }
+  pieces.forEach(p => {
+    p.x = p.initialX;
+    p.y = p.initialY;
+
+    const el = document.querySelector(`.piece[data-id='${p.id}']`);
+    if (el) {
+      el.style.left = (p.x * 100) + 'px';
+      el.style.top = (p.y * 100) + 'px';
+    }
+
+    const [w, h] = p.size.split('x').map(Number);
+    occupyGrid(p.id, p.x, p.y, w, h);
+  });
 }

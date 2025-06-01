@@ -197,7 +197,7 @@ html, body {
 #restartBtn {
   width: 50px;
   height: 50px;
-  background-color: #c2b280;
+  background-color: #c2b280e0;
   border: 3px solid #3e3a2d;
   border-radius: 50%;
   cursor: pointer;
